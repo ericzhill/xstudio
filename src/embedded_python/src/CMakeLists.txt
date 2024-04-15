@@ -1,12 +1,22 @@
 cmake_minimum_required(VERSION 3.12)
 project(embedded_python VERSION 0.1.0 LANGUAGES CXX)
 
-find_package(pybind11 REQUIRED)  # or `add_subdirectory(pybind11)`
-find_package(spdlog REQUIRED)
-find_package(fmt REQUIRED)
-find_package(Imath)
-find_package(OpenTime REQUIRED)
-find_package(OpenTimelineIO REQUIRED)
+if (WIN32)
+	# TODO
+	find_package(Imath)
+	find_package(pybind11 REQUIRED)
+elseif(APPLE)
+	# TODO
+else()
+	find_package(pybind11 REQUIRED)  # or `add_subdirectory(pybind11)`
+	find_package(spdlog REQUIRED)
+	find_package(fmt REQUIRED)
+	find_package(Imath)
+	find_package(OpenTime REQUIRED)
+	find_package(OpenTimelineIO REQUIRED)
+endif()
+
+
 
 set(SOURCES
 	embedded_python.cpp
@@ -27,8 +37,8 @@ target_link_libraries(${PROJECT_NAME}
 		xstudio::utility
 		xstudio::broadcast
 		pybind11::embed
-		OTIO::opentime
-		OTIO::opentimelineio
+		#OTIO::opentime
+		#OTIO::opentimelineio
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_DEPENDS_NO_SHARED true)

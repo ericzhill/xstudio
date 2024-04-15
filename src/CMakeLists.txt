@@ -1,11 +1,10 @@
-
 include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/macros.cmake")
 
 if(INSTALL_PYTHON_MODULE OR BUILD_DOCS)
 	add_src_and_test(python_module)
 endif ()
 
-if(INSTALL_XSTUDIO)
+if(true)
 	add_src_and_test(audio)
 	add_src_and_test(bookmark)
 	add_src_and_test(caf_utility)
@@ -28,7 +27,7 @@ if(INSTALL_XSTUDIO)
 	add_src_and_test(playlist)
 	add_src_and_test(plugin/colour_pipeline)
 	add_src_and_test(plugin/colour_op)
-	add_src_and_test(plugin/data_source)
+	#add_src_and_test(plugin/data_source)
 	add_src_and_test(plugin/hud)
 	add_src_and_test(plugin/media_hook)
 	add_src_and_test(plugin/media_metadata)
@@ -55,6 +54,8 @@ if(INSTALL_XSTUDIO)
 	endif(BUILD_GRADING_DEMO)	
 
 endif ()
+
+
 
 add_src_and_test(broadcast)
 add_src_and_test(global_store)

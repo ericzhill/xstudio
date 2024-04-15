@@ -14,7 +14,6 @@ option(ENABLE_CLANG_FORMAT "Enable clang format, ninja clangformat." OFF)
 option(FORCE_COLORED_OUTPUT "Always produce ANSI-colored output (GNU/Clang only)." TRUE)
 option(OPTIMIZE_FOR_NATIVE "Build with -march=native" OFF)
 option(BUILD_RESKIN "Build xstudio reskin binary" ON)
-
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 
 set(STUDIO_PLUGINS "" CACHE STRING "Enable compilation of SITE plugins")
@@ -136,7 +135,6 @@ if(ENABLE_CLANG_FORMAT)
   clangformat_setup(${FORMAT_ITEMS})
 endif()
 
-
 if(INSTALL_PYTHON_MODULE)
   add_subdirectory(python)
 endif()
@@ -158,5 +156,8 @@ if(INSTALL_XSTUDIO)
   endif ()
 
 endif ()
-
-add_subdirectory("extern/reproc")
+if (WIN32)
+    # TODO
+else()
+   #add_subdirectory("extern/reproc")
+endif()

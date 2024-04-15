@@ -1,8 +1,13 @@
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/modules")
 
 find_package(Python COMPONENTS Interpreter)
-find_package(Doxygen REQUIRED)
-find_package(Sphinx REQUIRED)
+if (WIN32)
+	# TODO
+else()
+	find_package(Doxygen REQUIRED)
+	find_package(Sphinx REQUIRED)
+endif()
+
 
 # Find all the public headers
 set(XSTUDIO_PUBLIC_HEADERS)

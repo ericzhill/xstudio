@@ -6,11 +6,11 @@ macro(default_compile_options name)
 		# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-variable>
 		# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-but-set-variable>
 		# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-parameter>
-		PRIVATE $<$<CONFIG:Debug>:-Wno-unused-function>
+		#PRIVATE $<$<CONFIG:Debug>:-Wno-unused-function>
 		# PRIVATE $<$<CONFIG:Debug>:-Wall>
 		# PRIVATE $<$<CONFIG:Debug>:-Werror>
-		PRIVATE $<$<CONFIG:Debug>:-Wextra>
-		PRIVATE $<$<CONFIG:Debug>:-Wpedantic>
+		#PRIVATE $<$<CONFIG:Debug>:-Wextra>
+		#PRIVATE $<$<CONFIG:Debug>:-Wpedantic>
 		# PRIVATE ${GTEST_CFLAGS}
 	)
 
@@ -21,7 +21,7 @@ macro(default_compile_options name)
 	target_compile_definitions(${name}
 		PUBLIC $<$<BOOL:${BUILD_TESTING}>:test_private=public>
 		PUBLIC $<$<NOT:$<BOOL:${BUILD_TESTING}>>:test_private=private>
-		PRIVATE -D__linux__
+		#PRIVATE -D__linux__
 		PRIVATE XSTUDIO_GLOBAL_VERSION=\"${XSTUDIO_GLOBAL_VERSION}\"
 		PRIVATE XSTUDIO_GLOBAL_NAME=\"${XSTUDIO_GLOBAL_NAME}\"
 		PRIVATE PROJECT_VERSION=\"${PROJECT_VERSION}\"
@@ -40,11 +40,11 @@ if (BUILD_TESTING)
 			# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-variable>
 			# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-but-set-variable>
 			# PRIVATE $<$<CONFIG:Debug>:-Wno-unused-parameter>
-			PRIVATE $<$<CONFIG:Debug>:-Wno-unused-function>
+			#PRIVATE $<$<CONFIG:Debug>:-Wno-unused-function>
 			# PRIVATE $<$<CONFIG:Debug>:-Wall>
 			# PRIVATE $<$<CONFIG:Debug>:-Werror>
-			PRIVATE $<$<CONFIG:Debug>:-Wextra>
-			PRIVATE $<$<CONFIG:Debug>:-Wpedantic>
+			#PRIVATE $<$<CONFIG:Debug>:-Wextra>
+			#PRIVATE $<$<CONFIG:Debug>:-Wpedantic>
 			PRIVATE ${GTEST_CFLAGS}
 		)
 
@@ -82,7 +82,7 @@ macro(default_options_local name)
 	    PRIVATE
 	        ${CMAKE_CURRENT_SOURCE_DIR}/src
 	    SYSTEM PUBLIC
-	    	$<BUILD_INTERFACE:${ROOT_DIR}/extern/include>
+	    	#$<BUILD_INTERFACE:${ROOT_DIR}/extern/include>
 	)
 	set_target_properties(${name}
 	    PROPERTIES
@@ -146,7 +146,7 @@ endmacro()
 if (BUILD_TESTING)
 	macro(default_options_gtest name)
 		find_package(PkgConfig)
-		pkg_search_module(GTEST REQUIRED gtest_main)
+		#pkg_search_module(GTEST REQUIRED gtest_main)
 		if (NOT CAF_FOUND)
 			find_package(CAF COMPONENTS core io)
 		endif (NOT CAF_FOUND)

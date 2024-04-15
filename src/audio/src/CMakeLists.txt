@@ -1,6 +1,6 @@
 project(audio_output VERSION 0.1.0 LANGUAGES CXX)
-find_package(ALSA REQUIRED)
-find_package(PulseAudio REQUIRED)
+#removed because linux: find_package(ALSA REQUIRED)
+#removed because linux: find_package(PulseAudio REQUIRED)
 
 set(SOURCES
 	audio_output.cpp

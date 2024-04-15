@@ -22,6 +22,13 @@ find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(PkgConfig REQUIRED)
-pkg_search_module(UUID REQUIRED uuid)
+if (WIN32)
+	# TODO
+elseif(APPLE)
+	# TODO
+else()
+	pkg_search_module(UUID REQUIRED uuid)
+endif()
+
 
 create_component_static(utility 0.1.0 "${LINK_DEPS}" "${STATIC_LINK_DEPS}")

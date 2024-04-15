@@ -5,20 +5,31 @@ set(SOURCES
 	../../../../ui/qml/reskin/qml_reskin.qrc
 	../../../../ui/qml/xstudio/qml.qrc
 )
-
-find_package(OpenGL REQUIRED)
-find_package(GLEW REQUIRED)
 find_package(Qt5 COMPONENTS Core Quick Gui Widgets OpenGL REQUIRED)
 find_package(OpenSSL)
 find_package(ZLIB)
-find_package(OpenTime REQUIRED)
-find_package(OpenTimelineIO REQUIRED)
+if (WIN32)
+	# TODO
+elseif(APPLE)
+	# TODO
+else()
+	find_package(OpenGL REQUIRED)
+	find_package(GLEW REQUIRED)
+	find_package(OpenTime REQUIRED)
+	find_package(OpenTimelineIO REQUIRED)
+endif()
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+#add_executable(${PROJECT_NAME} ${SOURCES})
+
+add_executable(${PROJECT_NAME} WIN32 ${SOURCES})
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE C)
+target_compile_options(${PROJECT_NAME} PRIVATE "/ZI")
+#target_link_options("xStudio" PRIVATE "/INCREMENTAL")
+
 
 configure_file(.clang-tidy .clang-tidy)
 configure_file(xstudio.sh.in xstudio.sh)
@@ -53,8 +64,8 @@ target_link_libraries(${PROJECT_NAME}
 		Qt5::Widgets
 		OpenSSL::SSL
 		ZLIB::ZLIB
-		OTIO::opentime
-		OTIO::opentimelineio
+		#OTIO::opentime
+		#OTIO::opentimelineio
 )
 
 set_target_properties(${PROJECT_NAME}
@@ -66,6 +77,7 @@ set_target_properties(${PROJECT_NAME}
 
 install(TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION bin)
+
 
 install(PROGRAMS
   ${CMAKE_CURRENT_BINARY_DIR}/xstudio.sh
